@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { ThemeProvider, createTheme } from '@mui/material'
-import App from './App.tsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ThemeProvider, createTheme } from '@mui/material';
+import App from './App.tsx';
+import './index.css';
 
 const theme = createTheme({
   palette: {
@@ -12,7 +12,7 @@ const theme = createTheme({
     },
     text: {
       primary: '#000',
-      secondary: '#9e9e9e'
+      secondary: '#9e9e9e',
     },
   },
 });
@@ -23,4 +23,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <App />
     </ThemeProvider>
   </React.StrictMode>,
-)
+);
