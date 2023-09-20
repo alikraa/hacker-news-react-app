@@ -15,6 +15,7 @@ function Header() {
         <Typography
           variant="h4"
           sx={{ flexGrow: 1, cursor: 'pointer' }}
+          onClick={() => window.location.reload()}
         >
           Hacker News
         </Typography>

@@ -10,7 +10,7 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
-function NewsItem() {
+function NewsItem({ date, rating, name, author }) {
   return (
     <Grid item xs={4}>
       <Card sx={{ minWidth: 370 }}>
@@ -22,11 +22,11 @@ function NewsItem() {
             }}
           >
             <Typography fontSize={16} color="text.secondary">
-              Date
+              {date}
             </Typography>
 
             <Typography fontSize={16} color="text.secondary">
-              Rating
+              {rating}
               <TrendingUpIcon
                 color="disabled"
                 fontSize="small"
@@ -35,14 +35,14 @@ function NewsItem() {
             </Typography>
           </Box>
 
-          <Typography variant="h5" component="div" sx={{ p: 3 }}>
-            Name
+          <Typography variant="h5" component="div" sx={{ p: 3, height: 165 }}>
+            {name}
           </Typography>
 
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <PersonIcon color="disabled" fontSize="small" sx={{ mr: 1 }} />
             <Typography color="text.secondary" align="center">
-              Author
+              {author}
             </Typography>
           </Box>
         </CardContent>
