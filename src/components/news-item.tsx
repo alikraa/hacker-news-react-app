@@ -9,8 +9,9 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { Link } from 'react-router-dom';
 
-function NewsItem({ date, rating, name, author }) {
+function NewsItem({ id, date, rating, name, author }) {
   return (
     <Grid item xs={4}>
       <Card sx={{ minWidth: 370 }}>
@@ -47,9 +48,11 @@ function NewsItem({ date, rating, name, author }) {
           </Box>
         </CardContent>
         <CardActions>
-          <Button size="medium" sx={{ fontWeight: 600, fontSize: 17 }}>
-            More
-          </Button>
+          <Link to={`/news/${id}`}>
+            <Button size="medium" sx={{ fontWeight: 600, fontSize: 17 }}>
+              More
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>
