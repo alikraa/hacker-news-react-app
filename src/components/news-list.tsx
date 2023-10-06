@@ -3,20 +3,27 @@ import { Button, Container, Grid } from '@mui/material';
 import format from 'date-fns/format';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsItem } from './news-item.tsx';
-import { baseUrl, dataType, getStory, serverRequest } from '../ts/request.ts';
+import { getStory } from '../ts/request.ts';
+import { useAppSelector } from '../store/hooks.ts';
+import { NewsIds } from '../store/news-slice.ts';
+
+interface State {
+  newsIds: NewsIds;
+}
 
 function NewsList() {
+  const newsIds = useAppSelector((state: State) => state.newsIds.data);
+
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const url = `${baseUrl}${dataType}.json`;
-
-    serverRequest(url)
-      .then((data) => getStory(data))
-      .then((res) => setNews(res))
-      .finally(() => setIsLoading(true));
-  }, []);
+    if (newsIds !== null) {
+      getStory(newsIds)
+        .then((data) => setNews(data))
+        .finally(() => setIsLoading(true));
+    }
+  }, [newsIds]);
 
   return (
     <div>

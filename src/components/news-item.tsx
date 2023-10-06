@@ -10,8 +10,12 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../store/hooks.ts';
+import { addCurrentNews } from '../store/current-news-slice.ts';
 
 function NewsItem({ id, date, rating, name, author }) {
+  const dispatch = useAppDispatch();
+
   return (
     <Grid item xs={4}>
       <Card sx={{ minWidth: 370 }}>
@@ -49,7 +53,11 @@ function NewsItem({ id, date, rating, name, author }) {
         </CardContent>
         <CardActions>
           <Link to={`/news/${id}`}>
-            <Button size="medium" sx={{ fontWeight: 600, fontSize: 17 }}>
+            <Button
+              size="medium"
+              sx={{ fontWeight: 600, fontSize: 17 }}
+              onClick={() => dispatch(addCurrentNews(id))}
+            >
               More
             </Button>
           </Link>
