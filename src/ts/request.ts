@@ -1,6 +1,6 @@
 export const baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 export const dataType = 'newstories';
-const pathStory = 'item/';
+export const pathStory = 'item/';
 
 export const serverRequest = async (url: string) => {
   try {
