@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Alert } from '@mui/material';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './components/header.tsx';
-import { MAX_NEWS, NEWS_INCREMENT } from './ts/consts.ts';
+import { homePath } from './ts/consts.ts';
 import { useAppDispatch } from './store/hooks.ts';
 import { fetchNewsIds } from './store/news-slice.ts';
 import { baseUrl, dataType } from './ts/request.ts';
@@ -10,46 +9,32 @@ import './App.css';
 
 function App() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
-  const [end, setEnd] = useState(NEWS_INCREMENT);
-  const [message, setMessage] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState(true);
+
+  const url = `${baseUrl}${dataType}.json`;
 
   useEffect(() => {
-    const url = `${baseUrl}${dataType}.json`;
     dispatch(fetchNewsIds(url));
-  }, [dispatch]);
+  }, []);
 
-  const showMore = () => {
-    if (end === MAX_NEWS) {
-      setEnd(MAX_NEWS);
-      setMessage(true);
+  useEffect(() => {
+    if (location.pathname === homePath) {
+      setCurrentLocation(true);
+    } else {
+      setCurrentLocation(false);
     }
-    setEnd((prev) => prev + NEWS_INCREMENT);
+  }, [location.pathname]);
+
+  const update = () => {
+    dispatch(fetchNewsIds(url));
   };
 
   return (
     <>
-      <Header />
+      <Header handleClick={update} location={currentLocation} />
       <Outlet />
-      {message ? (
-        <Alert
-          severity="success"
-          onClose={() => {
-            setMessage(false);
-          }}
-          sx={{
-            width: 400,
-            position: 'fixed',
-            right: 20,
-            bottom: 10,
-            fontSize: 20,
-          }}
-        >
-          All News has been loaded
-        </Alert>
-      ) : (
-        ''
-      )}
     </>
   );
 }

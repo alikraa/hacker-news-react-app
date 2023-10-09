@@ -50,7 +50,12 @@ function NewsDetails() {
             </Link>
 
             <Link to={news.url} target="_blank">
-              <Button variant="outlined" size="large" sx={{ fontSize: 17 }}>
+              <Button
+                variant="outlined"
+                disabled={!news.url}
+                size="large"
+                sx={{ fontSize: 17 }}
+              >
                 See News
               </Button>
             </Link>

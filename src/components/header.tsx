@@ -1,7 +1,7 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import UpdateIcon from '@mui/icons-material/Update';
 
-function Header() {
+function Header({ handleClick, location }) {
   return (
     <AppBar
       position="static"
@@ -19,9 +19,13 @@ function Header() {
         >
           Hacker News
         </Typography>
-        <IconButton color="inherit">
-          <UpdateIcon />
-        </IconButton>
+        {location ? (
+          <IconButton color="inherit" onClick={handleClick}>
+            <UpdateIcon />
+          </IconButton>
+        ) : (
+          ''
+        )}
       </Toolbar>
     </AppBar>
   );
