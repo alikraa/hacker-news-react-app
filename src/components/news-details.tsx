@@ -15,6 +15,7 @@ import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import format from 'date-fns/format';
 import { Link } from 'react-router-dom';
 import LoopIcon from '@mui/icons-material/Loop';
+import { NewsComments } from './news-comments.tsx';
 import { useAppSelector } from '../store/hooks.ts';
 import { baseUrl, pathStory, serverRequest } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
@@ -98,6 +99,7 @@ function NewsDetails() {
             </IconButton>
           </Box>
           <Divider color="inherit" />
+          <NewsComments />
         </>
       ) : (
         <LoopIcon color="primary" sx={{ width: '100%', height: 150, mt: 20 }} />
