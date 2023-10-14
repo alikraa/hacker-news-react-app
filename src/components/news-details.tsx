@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsComments } from './news-comments.tsx';
 import { useAppSelector } from '../store/hooks.ts';
-import { baseUrl, pathStory, serverRequest } from '../ts/request.ts';
+import { baseUrl, pathStory, serverRequest, getStory } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
 
 function NewsDetails() {
@@ -26,6 +26,8 @@ function NewsDetails() {
   const [news, setNews] = useState(defaultNews);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [comments, setComments] = useState(defaultNews.kids);
+
   useEffect(() => {
     if (currentNews !== 0) {
       serverRequest(`${baseUrl}${pathStory}${currentNews}.json`)
@@ -33,6 +35,12 @@ function NewsDetails() {
         .finally(() => setIsLoading(true));
     }
   }, [currentNews]);
+
+  useEffect(() => {
+    if (news.kids?.length > 0) {
+      getStory(news.kids).then((data) => setComments(data));
+    }
+  }, [news.kids]);
 
   return (
     <Container maxWidth="md" sx={{ mt: '30px' }}>
@@ -99,7 +107,7 @@ function NewsDetails() {
             </IconButton>
           </Box>
           <Divider color="inherit" />
-          <NewsComments />
+          <NewsComments comments={comments} />
         </>
       ) : (
         <LoopIcon color="primary" sx={{ width: '100%', height: 150, mt: 20 }} />

@@ -1,12 +1,12 @@
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { CommentItem } from './comment-item.tsx';
 
-function NewsComments() {
+function NewsComments({ comments }) {
   return (
     <Box>
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
+      {comments.map((comment) => (
+        <CommentItem key={comment.value.id} comment={comment.value} />
+      ))}
     </Box>
   );
 }
