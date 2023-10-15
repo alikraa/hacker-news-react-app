@@ -1,15 +1,23 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Typography,
-  Divider,
-  Container,
-} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Avatar, Box, Button, Typography, Container } from '@mui/material';
 import format from 'date-fns/format';
+import { getStories } from '../ts/request.ts';
+import { defaultComment } from '../ts/consts.ts';
 
 function CommentItem({ comment }) {
   const { by, text, time, kids } = comment;
+
+  const [openReplies, setOpenReplies] = useState(false);
+  const [kidComments, setKidComments] = useState(defaultComment);
+
+  useEffect(() => {
+    if (kids) {
+      getStories(kids).then((data) => setKidComments(data));
+    }
+  });
+
+  const showReplies = () =>
+    openReplies ? setOpenReplies(false) : setOpenReplies(true);
 
   return (
     <Container maxWidth="md" sx={{ mt: 1 }}>
@@ -35,7 +43,7 @@ function CommentItem({ comment }) {
           {format(new Date(time * 1000), 'PPp')}
         </Typography>
         {kids ? (
-          <Button>
+          <Button onClick={showReplies}>
             <Typography fontSize={16} fontWeight={600} color="primary">
               {`${kids.length} replies`}
             </Typography>
@@ -44,7 +52,9 @@ function CommentItem({ comment }) {
           ''
         )}
       </Box>
-      <Divider />
+      {openReplies
+        ? kidComments.map((item) => <CommentItem comment={item.value} />)
+        : ''}
     </Container>
   );
 }

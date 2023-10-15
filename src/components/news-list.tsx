@@ -3,7 +3,7 @@ import { Alert, Button, Container, Grid } from '@mui/material';
 import format from 'date-fns/format';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsItem } from './news-item.tsx';
-import { getStory } from '../ts/request.ts';
+import { getStories } from '../ts/request.ts';
 import { useAppSelector } from '../store/hooks.ts';
 import { NewsIds } from '../store/news-slice.ts';
 import { NEWS_INCREMENT, MAX_NEWS } from '../ts/consts.ts';
@@ -23,7 +23,7 @@ function NewsList() {
 
   useEffect(() => {
     if (newsIds !== null) {
-      getStory(newsIds)
+      getStories(newsIds)
         .then((data) => setNews(data))
         .finally(() => setIsLoading(true));
     }

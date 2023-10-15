@@ -17,7 +17,7 @@ export const serverRequest = async (url: string) => {
   }
 };
 
-export const getStory = async (ids: number[]) => {
+export const getStories = async (ids: number[]) => {
   try {
     const response = await Promise.allSettled(
       ids.map((id) => serverRequest(`${baseUrl}${pathStory}${id}.json`))

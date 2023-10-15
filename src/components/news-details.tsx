@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsComments } from './news-comments.tsx';
 import { useAppSelector } from '../store/hooks.ts';
-import { baseUrl, pathStory, serverRequest, getStory } from '../ts/request.ts';
+import { baseUrl, pathStory, serverRequest, getStories } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
 
 function NewsDetails() {
@@ -38,7 +38,7 @@ function NewsDetails() {
 
   useEffect(() => {
     if (news.kids?.length > 0) {
-      getStory(news.kids).then((data) => setComments(data));
+      getStories(news.kids).then((data) => setComments(data));
     }
   }, [news.kids]);
 
