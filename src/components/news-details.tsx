@@ -17,7 +17,12 @@ import { Link } from 'react-router-dom';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsComments } from './news-comments.tsx';
 import { useAppSelector } from '../store/hooks.ts';
-import { baseUrl, pathStory, serverRequest, getStories } from '../ts/request.ts';
+import {
+  baseUrl,
+  pathStory,
+  serverRequest,
+  getStories,
+} from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
 
 function NewsDetails() {
@@ -102,12 +107,19 @@ function NewsDetails() {
               <ForumOutlinedIcon sx={{ mr: 2, verticalAlign: 'sub' }} />
               {news.descendants}
             </Typography>
-            <IconButton color="inherit" sx={{ verticalAlign: 'sub' }}>
+            <IconButton
+              color="inherit"
+              sx={{ verticalAlign: 'sub' }}
+              onClick={() => {
+                setComments(defaultNews.kids);
+                getStories(news.kids).then((data) => setComments(data));
+              }}
+            >
               <UpdateIcon />
             </IconButton>
           </Box>
           <Divider color="inherit" />
-          <NewsComments comments={comments} />
+          <NewsComments comments={comments} descendants={news.descendants} />
         </>
       ) : (
         <LoopIcon color="primary" sx={{ width: '100%', height: 150, mt: 20 }} />
