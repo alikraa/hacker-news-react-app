@@ -32,6 +32,9 @@ function NewsDetails() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [comments, setComments] = useState(defaultNews.kids);
+  const [currentDescendants, setCurrentDescendants] = useState(
+    defaultNews.descendants
+  );
 
   useEffect(() => {
     if (currentNews !== 0) {
@@ -46,6 +49,12 @@ function NewsDetails() {
       getStories(news.kids).then((data) => setComments(data));
     }
   }, [news.kids]);
+
+  useEffect(() => {
+    serverRequest(`${baseUrl}${pathStory}${currentNews}.json`).then((data) =>
+      setCurrentDescendants(data.descendants)
+    );
+  });
 
   return (
     <Container maxWidth="md" sx={{ mt: '30px' }}>
@@ -105,14 +114,18 @@ function NewsDetails() {
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography fontSize={19}>
               <ForumOutlinedIcon sx={{ mr: 2, verticalAlign: 'sub' }} />
-              {news.descendants}
+              {currentDescendants}
             </Typography>
             <IconButton
               color="inherit"
               sx={{ verticalAlign: 'sub' }}
               onClick={() => {
                 setComments(defaultNews.kids);
-                getStories(news.kids).then((data) => setComments(data));
+                if (news.kids?.length > 0) {
+                  getStories(news.kids).then((data) => {
+                    setComments(data);
+                  });
+                }
               }}
             >
               <UpdateIcon />
