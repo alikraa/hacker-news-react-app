@@ -1,5 +1,6 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import UpdateIcon from '@mui/icons-material/Update';
+import { Link } from 'react-router-dom';
 
 function Header({ handleClick, location }) {
   return (
@@ -11,14 +12,20 @@ function Header({ handleClick, location }) {
         height: '100px',
       }}
     >
-      <Toolbar>
-        <Typography
-          variant="h4"
-          sx={{ flexGrow: 1, cursor: 'pointer' }}
-          onClick={() => window.location.reload()}
-        >
-          Hacker News
-        </Typography>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Typography
+            variant="h4"
+            sx={{
+              flexGrow: 1,
+              cursor: 'pointer',
+              color: '#FFF',
+            }}
+          >
+            Hacker News
+          </Typography>
+        </Link>
+
         {location ? (
           <IconButton color="inherit" onClick={handleClick}>
             <UpdateIcon />

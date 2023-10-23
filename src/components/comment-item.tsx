@@ -22,12 +22,16 @@ function CommentItem({ comment }) {
   return (
     <Container maxWidth="md" sx={{ mt: 1 }}>
       <Box sx={{ display: 'flex', width: '100%', mb: 2 }}>
-        <Avatar sx={{ mr: 2 }}>{by.slice(0, 1) || ''}</Avatar>
+        <Avatar sx={{ mr: 2, bgcolor: '#3fbd3a' }}>
+          {by.slice(0, 1) || ''}
+        </Avatar>
         <Box>
           <Typography fontSize={20} sx={{ mb: 1 }}>
             {by}
           </Typography>
-          <Typography fontSize={18}>{text}</Typography>
+          <Typography fontSize={18} sx={{ wordBreak: 'break-word' }}>
+            {text}
+          </Typography>
         </Box>
       </Box>
       <Box
