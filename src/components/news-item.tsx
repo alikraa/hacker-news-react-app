@@ -12,8 +12,9 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../store/hooks.ts';
 import { addCurrentNews } from '../store/current-news-slice.ts';
+import { NewsItemProps } from '../ts/types.ts';
 
-function NewsItem({ id, date, rating, name, author }) {
+function NewsItem({ id, date, rating, name, author }: NewsItemProps) {
   const dispatch = useAppDispatch();
 
   return (

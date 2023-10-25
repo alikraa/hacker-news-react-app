@@ -24,9 +24,10 @@ import {
   getStories,
 } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
+import { State } from '../ts/types.ts';
 
 function NewsDetails() {
-  const currentNews = useAppSelector((state) => state.currentNews.currentNews);
+  const currentNews = useAppSelector((state: State) => state.currentNews.currentNews);
 
   const [news, setNews] = useState(defaultNews);
   const [isLoading, setIsLoading] = useState(false);

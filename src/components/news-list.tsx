@@ -5,17 +5,13 @@ import LoopIcon from '@mui/icons-material/Loop';
 import { NewsItem } from './news-item.tsx';
 import { getStories } from '../ts/request.ts';
 import { useAppSelector } from '../store/hooks.ts';
-import { NewsIds } from '../store/news-slice.ts';
 import { NEWS_INCREMENT, MAX_NEWS } from '../ts/consts.ts';
-
-interface State {
-  newsIds: NewsIds;
-}
+import { NewsArray, State } from '../ts/types.ts';
 
 function NewsList() {
   const newsIds = useAppSelector((state: State) => state.newsIds.data);
 
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<NewsArray[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [end, setEnd] = useState(NEWS_INCREMENT);

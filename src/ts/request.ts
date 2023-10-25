@@ -1,3 +1,5 @@
+import { NewsArray } from './types.ts';
+
 export const baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 export const dataType = 'newstories';
 export const pathStory = 'item/';
@@ -17,7 +19,9 @@ export const serverRequest = async (url: string) => {
   }
 };
 
-export const getStories = async (ids: number[]) => {
+export const getStories = async (
+  ids: number[]
+): Promise<string | PromiseSettledResult<NewsArray>[]> => {
   try {
     const response = await Promise.allSettled(
       ids.map((id) => serverRequest(`${baseUrl}${pathStory}${id}.json`))

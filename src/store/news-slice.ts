@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { NewsIds } from '../ts/types.ts';
 
 const fetchNewsIds = createAsyncThunk<
   number[],
@@ -18,12 +19,6 @@ const fetchNewsIds = createAsyncThunk<
     return rejectWithValue(error);
   }
 });
-
-export interface NewsIds {
-  data: number[] | null;
-  status: string;
-  error: string | unknown;
-}
 
 const initialState: NewsIds = {
   data: null,

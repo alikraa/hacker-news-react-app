@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import LoopIcon from '@mui/icons-material/Loop';
 import { CommentItem } from './comment-item.tsx';
+import { NewsCommentsProps } from '../ts/types.ts';
 
-function NewsComments({ comments, descendants }) {
+function NewsComments({ comments, descendants }: NewsCommentsProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

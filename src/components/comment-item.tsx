@@ -3,12 +3,13 @@ import { Avatar, Box, Button, Typography, Container } from '@mui/material';
 import format from 'date-fns/format';
 import { getStories } from '../ts/request.ts';
 import { defaultComment } from '../ts/consts.ts';
+import { CommentData, CommentItemProps } from '../ts/types.ts';
 
-function CommentItem({ comment }) {
+function CommentItem({ comment }: CommentItemProps) {
   const { by, text, time, kids } = comment;
 
   const [openReplies, setOpenReplies] = useState(false);
-  const [kidComments, setKidComments] = useState(defaultComment);
+  const [kidComments, setKidComments] = useState<CommentData[]>(defaultComment);
 
   useEffect(() => {
     if (kids) {

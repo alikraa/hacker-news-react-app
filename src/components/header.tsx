@@ -1,8 +1,9 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import UpdateIcon from '@mui/icons-material/Update';
 import { Link } from 'react-router-dom';
+import { HeaderProps } from '../ts/types.ts';
 
-function Header({ handleClick, location }) {
+function Header({ handleClick, location }: HeaderProps) {
   return (
     <AppBar
       position="static"
