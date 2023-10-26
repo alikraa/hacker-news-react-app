@@ -22,7 +22,7 @@ function NewsComments({ comments, descendants }: NewsCommentsProps) {
       {isLoading ? (
         comments.map((comment) => (
           <>
-            <CommentItem key={comment.value.id} comment={comment.value} />
+            <CommentItem key={comment.id} comment={comment} />
             <Divider />
           </>
         ))

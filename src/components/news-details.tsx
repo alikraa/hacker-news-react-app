@@ -24,15 +24,17 @@ import {
   getStories,
 } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
-import { State } from '../ts/types.ts';
+import { NewsCommentData, State } from '../ts/types.ts';
 
 function NewsDetails() {
-  const currentNews = useAppSelector((state: State) => state.currentNews.currentNews);
+  const currentNews = useAppSelector(
+    (state: State) => state.currentNews.currentNews
+  );
 
   const [news, setNews] = useState(defaultNews);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [comments, setComments] = useState(defaultNews.kids);
+  const [comments, setComments] = useState<NewsCommentData[]>(defaultNews.kids);
   const [currentDescendants, setCurrentDescendants] = useState(
     defaultNews.descendants
   );

@@ -7,33 +7,32 @@ interface HeaderProps {
 interface NewsItemProps {
   id: number;
   date: string;
-  rating: number;
-  name: string;
+  rating: number | undefined;
+  name: string | undefined;
   author: string;
 }
 
-interface CommentValue {
+interface NewsCommentData {
   by: string;
   id: number;
-  kids?: number[];
-  parent: number;
-  text: string;
   time: number;
   type: string;
-}
-
-interface CommentData {
-  status: string;
-  value: CommentValue;
+  descendants?: number;
+  score?: number;
+  title?: string;
+  url?: string;
+  kids?: number[];
+  parent?: number;
+  text?: string;
 }
 
 interface NewsCommentsProps {
-  comments: CommentData[];
+  comments: NewsCommentData[];
   descendants: number;
 }
 
 interface CommentItemProps {
-  comment: CommentValue;
+  comment: NewsCommentData;
 }
 
 // STORE
@@ -50,31 +49,12 @@ interface State {
   };
 }
 
-// REQUESTS
-interface NewsData {
-  by: string;
-  descendants: number;
-  id: number;
-  score: number;
-  time: number;
-  title: string;
-  type: string;
-  url: string;
-}
-
-interface NewsArray {
-  status: string;
-  value: NewsData;
-}
-
 export type {
   HeaderProps,
   NewsItemProps,
   NewsCommentsProps,
-  CommentValue,
-  CommentData,
   CommentItemProps,
   NewsIds,
   State,
-  NewsArray,
+  NewsCommentData,
 };

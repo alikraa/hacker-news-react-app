@@ -16,14 +16,11 @@ export const defaultNews = {
 
 export const defaultComment = [
   {
-    status: '',
-    value: {
-      by: '',
-      id: 0,
-      parent: 0,
-      text: '',
-      time: 0,
-      type: '',
-    },
+    by: '',
+    id: 0,
+    parent: 0,
+    text: '',
+    time: 0,
+    type: '',
   },
 ];

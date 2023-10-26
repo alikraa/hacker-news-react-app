@@ -6,12 +6,12 @@ import { NewsItem } from './news-item.tsx';
 import { getStories } from '../ts/request.ts';
 import { useAppSelector } from '../store/hooks.ts';
 import { NEWS_INCREMENT, MAX_NEWS } from '../ts/consts.ts';
-import { NewsArray, State } from '../ts/types.ts';
+import { NewsCommentData, State } from '../ts/types.ts';
 
 function NewsList() {
   const newsIds = useAppSelector((state: State) => state.newsIds.data);
 
-  const [news, setNews] = useState<NewsArray[]>([]);
+  const [news, setNews] = useState<NewsCommentData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [end, setEnd] = useState(NEWS_INCREMENT);
@@ -41,12 +41,12 @@ function NewsList() {
           <Grid container spacing={4}>
             {news.slice(0, end).map((item) => (
               <NewsItem
-                key={item.value.id}
-                id={item.value.id}
-                date={format(new Date(item.value.time * 1000), 'PPp')}
-                rating={item.value.score}
-                name={item.value.title}
-                author={item.value.by}
+                key={item.id}
+                id={item.id}
+                date={format(new Date(item.time * 1000), 'PPp')}
+                rating={item.score}
+                name={item.title}
+                author={item.by}
               />
             ))}
           </Grid>
