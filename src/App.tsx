@@ -5,7 +5,6 @@ import { homePath } from './ts/consts.ts';
 import { useAppDispatch } from './store/hooks.ts';
 import { fetchNewsIds } from './store/news-slice.ts';
 import { baseUrl, dataType } from './ts/request.ts';
-import './App.css';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -17,7 +16,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchNewsIds(url));
-  }, []);
+  }, [dispatch, url]);
 
   useEffect(() => {
     if (location.pathname === homePath) {

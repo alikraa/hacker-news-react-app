@@ -17,14 +17,10 @@ import { Link } from 'react-router-dom';
 import LoopIcon from '@mui/icons-material/Loop';
 import { NewsComments } from './news-comments.tsx';
 import { useAppSelector } from '../store/hooks.ts';
-import {
-  baseUrl,
-  pathStory,
-  serverRequest,
-  getStories,
-} from '../ts/request.ts';
+import { baseUrl, pathStory, serverRequest } from '../ts/request.ts';
 import { defaultNews } from '../ts/consts.ts';
 import { NewsCommentData, State } from '../ts/types.ts';
+import { getComments } from '../ts/view.ts';
 
 function NewsDetails() {
   const currentNews = useAppSelector(
@@ -48,9 +44,7 @@ function NewsDetails() {
   }, [currentNews]);
 
   useEffect(() => {
-    if (news.kids?.length > 0) {
-      getStories(news.kids).then((data) => setComments(data));
-    }
+    getComments(news.kids, setComments);
   }, [news.kids]);
 
   useEffect(() => {
@@ -124,11 +118,8 @@ function NewsDetails() {
               sx={{ verticalAlign: 'sub' }}
               onClick={() => {
                 setComments(defaultNews.kids);
-                if (news.kids?.length > 0) {
-                  getStories(news.kids).then((data) => {
-                    setComments(data);
-                  });
-                }
+
+                getComments(news.kids, setComments);
               }}
             >
               <UpdateIcon />

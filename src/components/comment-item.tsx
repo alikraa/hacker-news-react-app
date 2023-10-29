@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Avatar, Box, Button, Typography, Container } from '@mui/material';
 import format from 'date-fns/format';
-import { getStories } from '../ts/request.ts';
 import { defaultComment } from '../ts/consts.ts';
 import { NewsCommentData, CommentItemProps } from '../ts/types.ts';
+import { getComments } from '../ts/view.ts';
 
 function CommentItem({ comment }: CommentItemProps) {
   const { by, text, time, kids } = comment;
@@ -14,9 +14,9 @@ function CommentItem({ comment }: CommentItemProps) {
 
   useEffect(() => {
     if (kids) {
-      getStories(kids).then((data) => setKidComments(data));
+      getComments(kids, setKidComments);
     }
-  });
+  }, [kids]);
 
   const showReplies = () =>
     openReplies ? setOpenReplies(false) : setOpenReplies(true);
@@ -24,9 +24,7 @@ function CommentItem({ comment }: CommentItemProps) {
   return (
     <Container maxWidth="md" sx={{ mt: 1 }}>
       <Box sx={{ display: 'flex', width: '100%', mb: 2 }}>
-        <Avatar sx={{ mr: 2, bgcolor: '#3fbd3a' }}>
-          {by.slice(0, 1) || ''}
-        </Avatar>
+        <Avatar sx={{ mr: 2, bgcolor: '#3fbd3a' }}>{by?.slice(0, 1)}</Avatar>
         <Box>
           <Typography fontSize={20} sx={{ mb: 1 }}>
             {by}
