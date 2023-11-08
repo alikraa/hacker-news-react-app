@@ -3,6 +3,7 @@ import { Box, Divider } from '@mui/material';
 import LoopIcon from '@mui/icons-material/Loop';
 import { CommentItem } from './comment-item.tsx';
 import { NewsCommentsProps } from '../ts/types.ts';
+import { COUNT } from '../ts/consts.ts';
 
 function NewsComments({ comments, descendants }: NewsCommentsProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +24,7 @@ function NewsComments({ comments, descendants }: NewsCommentsProps) {
         comments.map((comment) => (
           <>
             <CommentItem key={comment.id} comment={comment} />
-            <Divider />
+            <Divider key={comment.id + COUNT} />
           </>
         ))
       ) : (
